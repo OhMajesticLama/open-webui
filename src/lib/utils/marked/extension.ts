@@ -16,15 +16,15 @@ function findMatchingClosingTag(src, openTag, closeTag) {
 }
 
 function detailsTokenizer(src) {
-	const detailsRegex = /^<details>\n/;
-	const summaryRegex = /^<summary>(.*?)<\/summary>\n/;
+	const detailsRegex = /^<details>/;
+	const summaryRegex = /^<summary>(.*?)<\/summary>/;
 
 	if (detailsRegex.test(src)) {
 		const endIndex = findMatchingClosingTag(src, '<details>', '</details>');
 		if (endIndex === -1) return;
 
 		const fullMatch = src.slice(0, endIndex);
-		let content = fullMatch.slice(10, -10).trim(); // Remove <details> and </details>
+		let content = fullMatch.slice(9, -10).trim(); // Remove <details> and </details>
 
 		let summary = '';
 		const summaryMatch = summaryRegex.exec(content);
